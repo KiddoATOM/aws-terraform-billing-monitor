@@ -22,6 +22,7 @@ resource "aws_lambda_function" "billing_monitor" {
     variables = {
       Topic_ARN = "${var.aws_sns_topic_arn == "" ? "${aws_sns_topic.sns_billing_alert_topic.0.arn}" : "${var.aws_sns_topic_arn}"}"
       THRESHOLD = var.threshold
+      Currency  = var.currency
     }
   }
   tags = merge(map("DeployedBy", "terraform"), var.custom_tags)
